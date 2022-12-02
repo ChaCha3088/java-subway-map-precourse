@@ -19,7 +19,7 @@ public class Initialization {
         initialSubwayInfo.forEach((key, value)->{
             Line line = new Line(key);
             StationRepository stationRepository = new StationRepository();
-            for (String station : value) { stationRepository.addStation(new Station(station)); }
+            for (String station : value) { stationRepository.addStation(station); }
             line.addStationRepository(stationRepository);
             lineRepository.addLine(line);
         });

@@ -12,19 +12,16 @@ public class StationRepository {
         return Collections.unmodifiableList(stations);
     }
 
-    public static void addStation(Station station) {
-        stations.add(station);
-    }
-
-    public static boolean deleteStation(String name) {
-        return stations.removeIf(station -> Objects.equals(station.getName(), name));
-    }
-
-    public static String findStation(String name) {
+    public static Boolean addStation(String name) {
         Integer result = stations.indexOf(name);
-        if (result >= 0) {
-            return stations.get(result).getName();
+        if (result == -1) {
+            stations.add(new Station(name));
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    public static Boolean deleteStation(String name) {
+        return stations.removeIf(station -> Objects.equals(station.getName(), name));
     }
 }

@@ -8,13 +8,19 @@ public class Subway {
         System.out.println(this.lineRepository.lines().get(0).getName());
     }
 
-    public void registerStation(String name) {
-        String result = stationRepository.findStation(name);
-        if (result == null) {
-            this.stationRepository.addStation(new Station(name));
+    public void addStation(String name) {
+        Boolean result = stationRepository.addStation(name);
+        if (result) {
+            SubwayController.addSuccess(name);
         }
-        if (result != null) {
-            SubwayController.existAlready(result);
+        SubwayController.addFail(name);
+    }
+
+    public void deleteStation(String name) {
+        Boolean result = stationRepository.deleteStation(name);
+        if (result) {
+            SubwayController.deleteSuccess(name);
         }
+        SubwayController.deleteFail(name);
     }
 }
