@@ -8,23 +8,26 @@ public class Subway {
     StationRepository stationRepository = new StationRepository();
 
     public Subway() {
-        System.out.println(this.lineRepository.lines().get(0).getName());
     }
 
-    public void addStation(String stationName) {
+    public Boolean addStation(String stationName) {
         Boolean result = stationRepository.addStation(stationName);
         if (result) {
             SubwayController.addSuccess(stationName);
+            return result;
         }
         SubwayController.addFail(stationName);
+        return result;
     }
 
-    public void deleteStation(String stationName) {
+    public Boolean deleteStation(String stationName) {
         Boolean result = stationRepository.deleteStation(stationName);
         if (result) {
             SubwayController.deleteSuccess(stationName);
+            return result;
         }
         SubwayController.deleteFail(stationName);
+        return result;
     }
 
     public void inquiryStations() {
@@ -51,10 +54,8 @@ public class Subway {
         line.addStationRepository(newStationRepository);
         Boolean result = lineRepository.addLine(line);
         if (result) {
-            SubwayController.addSuccess(lineName);
             return true;
         }
-        SubwayController.addFail(lineName);
         return false;
     }
 
