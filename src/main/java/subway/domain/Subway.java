@@ -30,7 +30,9 @@ public class Subway {
     public void inquiryStations() {
         List<String> result = new ArrayList<>();
         lineRepository.lines().forEach(line -> {
-            result.add(line.getName());
+            line.getStationRepository().stations().forEach(station -> {
+                result.add(station.getName());
+            });
         });
         stationRepository.stations().forEach(station -> {
             result.add(station.getName());
@@ -60,4 +62,10 @@ public class Subway {
         return lineRepository.deleteLineByLineName(lineName);
     }
 
+    public void inquiryLines() {
+        List<String> result = new ArrayList<>();
+        lineRepository.lines().forEach(line -> {
+            result.add(line.getName());
+        });
+    }
 }

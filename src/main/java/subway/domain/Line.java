@@ -15,6 +15,10 @@ public class Line {
         return name;
     }
 
+    public StationRepository getStationRepository() {
+        return this.stationRepository;
+    }
+
     public void addStationRepository(StationRepository stationRepository) {
         this.stationRepository = stationRepository;
     }
