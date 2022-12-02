@@ -12,11 +12,31 @@ public class LineRepository {
         return Collections.unmodifiableList(lines);
     }
 
-    public static void addLine(Line line) {
-        lines.add(line);
+    public static Boolean findLineByLineName(String lineName) {
+        List<String> lineNames = new ArrayList<>();
+        lines.forEach(line -> {
+            lineNames.add(line.getName());
+        });
+        Integer result = lineNames.indexOf(lineName);
+        if (result == -1) { return false; }
+        return true;
     }
 
-    public static boolean deleteLineByName(String name) {
-        return lines.removeIf(line -> Objects.equals(line.getName(), name));
+    public static Boolean addLine(Line line) {
+        Boolean result = findLineByLineName(line.getName());
+        if (!result) {
+            SubwayController.addSuccess(line.getName());
+            lines.add(line);
+            return true;
+        }
+        if (result) {
+            SubwayController.addFail(line.getName());
+            return false;
+        }
+        return false;
+    }
+
+    public static Boolean deleteLineByStationName(String stationName) {
+        return lines.removeIf(line -> Objects.equals(line.getName(), stationName));
     }
 }

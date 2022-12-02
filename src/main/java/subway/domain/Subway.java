@@ -11,20 +11,20 @@ public class Subway {
         System.out.println(this.lineRepository.lines().get(0).getName());
     }
 
-    public void addStation(String name) {
-        Boolean result = stationRepository.addStation(name);
+    public void addStation(String stationName) {
+        Boolean result = stationRepository.addStation(stationName);
         if (result) {
-            SubwayController.addSuccess(name);
+            SubwayController.addSuccess(stationName);
         }
-        SubwayController.addFail(name);
+        SubwayController.addFail(stationName);
     }
 
-    public void deleteStation(String name) {
-        Boolean result = stationRepository.deleteStation(name);
+    public void deleteStation(String stationName) {
+        Boolean result = stationRepository.deleteStation(stationName);
         if (result) {
-            SubwayController.deleteSuccess(name);
+            SubwayController.deleteSuccess(stationName);
         }
-        SubwayController.deleteFail(name);
+        SubwayController.deleteFail(stationName);
     }
 
     public void inquiryStations() {
@@ -35,5 +35,24 @@ public class Subway {
         stationRepository.stations().forEach(station -> {
             result.add(station.getName());
         });
+    }
+
+    public Boolean addLine(String lineName, List<String> stationNames) {
+        StationRepository newStationRepository = new StationRepository();
+        for (String stationName : stationNames) {
+            Boolean result = newStationRepository.addStation(stationName);
+            if (!result) {
+                return false;
+            }
+        }
+        Line line = new Line(lineName);
+        line.addStationRepository(newStationRepository);
+        Boolean result = lineRepository.addLine(line);
+        if (result) {
+            SubwayController.addSuccess(lineName);
+            return true;
+        }
+        SubwayController.addFail(lineName);
+        return false;
     }
 }

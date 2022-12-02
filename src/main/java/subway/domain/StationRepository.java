@@ -12,10 +12,10 @@ public class StationRepository {
         return Collections.unmodifiableList(stations);
     }
 
-    public static Boolean addStation(String name) {
-        Integer result = stations.indexOf(name);
+    public static Boolean addStation(String stationName) {
+        Integer result = findStationByStationName(stationName);
         if (result == -1) {
-            stations.add(new Station(name));
+            stations.add(new Station(stationName));
             return true;
         }
         return false;
@@ -23,5 +23,9 @@ public class StationRepository {
 
     public static Boolean deleteStation(String name) {
         return stations.removeIf(station -> Objects.equals(station.getName(), name));
+    }
+
+    public static Integer findStationByStationName(String stationName) {
+        return stations.indexOf(stationName);
     }
 }
