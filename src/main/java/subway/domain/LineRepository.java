@@ -36,6 +36,10 @@ public class LineRepository {
         return false;
     }
 
+    public static Boolean deleteLineByLineName(String lineName) {
+        return lines.removeIf(line -> Objects.equals(line.getName(), lineName));
+    }
+
     public static Boolean deleteLineByStationName(String stationName) {
         return lines.removeIf(line -> Objects.equals(line.getName(), stationName));
     }

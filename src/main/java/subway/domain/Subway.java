@@ -55,4 +55,9 @@ public class Subway {
         SubwayController.addFail(lineName);
         return false;
     }
+
+    public Boolean deleteLine(String lineName) {
+        return lineRepository.deleteLineByLineName(lineName);
+    }
+
 }
