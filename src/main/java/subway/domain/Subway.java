@@ -1,5 +1,8 @@
 package subway.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Subway {
     LineRepository lineRepository = new Initialization().initializeLineRepository();
     StationRepository stationRepository = new StationRepository();
@@ -22,5 +25,15 @@ public class Subway {
             SubwayController.deleteSuccess(name);
         }
         SubwayController.deleteFail(name);
+    }
+
+    public void inquiryStations() {
+        List<String> result = new ArrayList<>();
+        lineRepository.lines().forEach(line -> {
+            result.add(line.getName());
+        });
+        stationRepository.stations().forEach(station -> {
+            result.add(station.getName());
+        });
     }
 }
