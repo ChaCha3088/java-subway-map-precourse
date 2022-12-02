@@ -69,7 +69,11 @@ public class Subway {
         });
     }
 
-    public Boolean putInLine(String lineName, String stationName, Integer index) {
-        return lineRepository.putInLine(lineName, stationName, index);
+    public Boolean putStationInLine(String lineName, String stationName, Integer index) {
+        return lineRepository.putStationInLine(lineName, stationName, index);
+    }
+
+    public Boolean pullStationOutFromLine(String lineName, String stationName) {
+        return lineRepository.pullStationOutFromLine(lineName, stationName);
     }
 }

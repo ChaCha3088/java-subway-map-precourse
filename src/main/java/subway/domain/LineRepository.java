@@ -40,12 +40,24 @@ public class LineRepository {
         return lines.removeIf(line -> Objects.equals(line.getName(), stationName));
     }
 
-    public static Boolean putInLine(String lineName, String stationName, Integer index) {
+    public static Boolean putStationInLine(String lineName, String stationName, Integer index) {
         Integer lineResult = findLineByLineName(lineName);
         if (lineResult == -1) {
             return false;
         }
-        Boolean stationResult = lines.get(lineResult).getStationRepository().putInStation(index, stationName);
+        Boolean stationResult = lines.get(lineResult).getStationRepository().putStationInLine(index, stationName);
+        if (!stationResult) {
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean pullStationOutFromLine(String lineName, String stationName) {
+        Integer lineResult = findLineByLineName(lineName);
+        if (lineResult == -1) {
+            return false;
+        }
+        Boolean stationResult = lines.get(lineResult).getStationRepository().pullStationOutFromLine(stationName);
         if (!stationResult) {
             return false;
         }

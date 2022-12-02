@@ -29,7 +29,7 @@ public class StationRepository {
         return stations.indexOf(stationName);
     }
 
-    public static Boolean putInStation(Integer index, String stationName) {
+    public static Boolean putStationInLine(Integer index, String stationName) {
         Integer result = findStationByStationName(stationName);
         if (result == -1) {
             stations.add(index-1, new Station(stationName));
@@ -37,4 +37,17 @@ public class StationRepository {
         }
         return false;
     }
+
+    public static Boolean pullStationOutFromLine(String stationName) {
+        if (stations.size() <= 2) {
+            return false;
+        }
+        Integer result = findStationByStationName(stationName);
+        if (result == -1) {
+            return false;
+        }
+        stations.remove(result);
+        return true;
+    }
+
 }
