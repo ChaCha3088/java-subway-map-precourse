@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LineRepository {
-    private static final List<Line> lines = new ArrayList<>();
+    private static List<Line> lines = new ArrayList<>();
 
     public static List<Line> lines() {
         return Collections.unmodifiableList(lines);
