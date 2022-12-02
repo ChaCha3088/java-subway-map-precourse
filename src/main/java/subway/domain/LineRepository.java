@@ -12,27 +12,23 @@ public class LineRepository {
         return Collections.unmodifiableList(lines);
     }
 
-    public static Boolean findLineByLineName(String lineName) {
+    public static Integer findLineByLineName(String lineName) {
         List<String> lineNames = new ArrayList<>();
         lines.forEach(line -> {
             lineNames.add(line.getName());
         });
         Integer result = lineNames.indexOf(lineName);
-        if (result == -1) { return false; }
-        return true;
+        return result;
     }
 
     public static Boolean addLine(Line line) {
-        Boolean result = findLineByLineName(line.getName());
-        if (!result) {
+        Integer result = findLineByLineName(line.getName());
+        if (result == -1) {
             SubwayController.addSuccess(line.getName());
             lines.add(line);
             return true;
         }
-        if (result) {
-            SubwayController.addFail(line.getName());
-            return false;
-        }
+        SubwayController.addFail(line.getName());
         return false;
     }
 
@@ -42,5 +38,17 @@ public class LineRepository {
 
     public static Boolean deleteLineByStationName(String stationName) {
         return lines.removeIf(line -> Objects.equals(line.getName(), stationName));
+    }
+
+    public static Boolean putInLine(String lineName, String stationName, Integer index) {
+        Integer lineResult = findLineByLineName(lineName);
+        if (lineResult == -1) {
+            return false;
+        }
+        Boolean stationResult = lines.get(lineResult).getStationRepository().putInStation(index, stationName);
+        if (!stationResult) {
+            return false;
+        }
+        return true;
     }
 }

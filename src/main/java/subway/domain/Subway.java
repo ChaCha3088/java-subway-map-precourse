@@ -68,4 +68,8 @@ public class Subway {
             result.add(line.getName());
         });
     }
+
+    public Boolean putInLine(String lineName, String stationName, Integer index) {
+        return lineRepository.putInLine(lineName, stationName, index);
+    }
 }

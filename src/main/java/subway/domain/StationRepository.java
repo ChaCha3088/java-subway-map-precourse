@@ -28,4 +28,13 @@ public class StationRepository {
     public static Integer findStationByStationName(String stationName) {
         return stations.indexOf(stationName);
     }
+
+    public static Boolean putInStation(Integer index, String stationName) {
+        Integer result = findStationByStationName(stationName);
+        if (result == -1) {
+            stations.add(index-1, new Station(stationName));
+            return true;
+        }
+        return false;
+    }
 }
