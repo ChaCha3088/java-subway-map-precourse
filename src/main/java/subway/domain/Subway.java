@@ -2,6 +2,9 @@ package subway.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import subway.domain.line.Line;
+import subway.domain.line.LineRepository;
+import subway.domain.station.StationRepository;
 
 public class Subway {
     LineRepository lineRepository = new Initialization().initializeLineRepository();
@@ -13,24 +16,20 @@ public class Subway {
     public Boolean addStation(String stationName) {
         Boolean result = stationRepository.addStation(stationName);
         if (result) {
-            SubwayController.addSuccess(stationName);
             return result;
         }
-        SubwayController.addFail(stationName);
         return result;
     }
 
     public Boolean deleteStation(String stationName) {
         Boolean result = stationRepository.deleteStation(stationName);
         if (result) {
-            SubwayController.deleteSuccess(stationName);
             return result;
         }
-        SubwayController.deleteFail(stationName);
         return result;
     }
 
-    public void inquiryStations() {
+    public List<String> inquiryStations() {
         List<String> result = new ArrayList<>();
         lineRepository.lines().forEach(line -> {
             line.getStationRepository().stations().forEach(station -> {
@@ -40,6 +39,7 @@ public class Subway {
         stationRepository.stations().forEach(station -> {
             result.add(station.getName());
         });
+        return result;
     }
 
     public Boolean addLine(String lineName, List<String> stationNames) {
@@ -63,11 +63,12 @@ public class Subway {
         return lineRepository.deleteLineByLineName(lineName);
     }
 
-    public void inquiryLines() {
+    public List<String> inquiryLines() {
         List<String> result = new ArrayList<>();
         lineRepository.lines().forEach(line -> {
             result.add(line.getName());
         });
+        return result;
     }
 
     public Boolean putStationInLine(String lineName, String stationName, Integer index) {

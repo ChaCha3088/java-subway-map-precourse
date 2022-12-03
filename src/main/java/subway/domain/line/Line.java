@@ -1,7 +1,6 @@
-package subway.domain;
+package subway.domain.line;
 
-import java.util.LinkedHashMap;
-import java.util.List;
+import subway.domain.station.StationRepository;
 
 public class Line {
     private String name;

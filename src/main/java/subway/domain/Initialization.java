@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import subway.domain.line.Line;
+import subway.domain.line.LineRepository;
+import subway.domain.station.StationRepository;
 
 public class Initialization {
     LinkedHashMap<String, List<String>> initialSubwayInfo = new LinkedHashMap<>();

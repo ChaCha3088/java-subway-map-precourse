@@ -1,25 +1,30 @@
 package subway.domain;
 
 import subway.InputView;
+import subway.OutputView;
+import subway.domain.line.LineController;
+import subway.domain.section.SectionController;
+import subway.domain.station.StationController;
 
 public class SubwayMainController {
     public SubwayMainController(Subway subway) {
         String input = "0";
         while (!input.equals("Q")) {
             OutputView.mainScreen();
-            input = InputView.inputOptions();
+            OutputView.selectOptions();
+            input = InputView.input();
             if (input.equals("1")) {
-                new SubwayStationController(subway);
+                new StationController(subway);
             }
             if (input.equals("2")) {
-                new SubwayLineController(subway);
+                new LineController(subway);
             }
             if (input.equals("3")) {
-                new SubwaySectionController();
+                new SectionController(subway);
             }
-            if (input.equals("4")) {
-                new SubwayMapController();
-            }
+//            if (input.equals("4")) {
+//                new SubwayMapController();
+//            }
         }
     }
 }

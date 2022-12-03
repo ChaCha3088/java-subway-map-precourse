@@ -1,4 +1,4 @@
-package subway.domain;
+package subway.domain.line;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,11 +24,9 @@ public class LineRepository {
     public static Boolean addLine(Line line) {
         Integer result = findLineByLineName(line.getName());
         if (result == -1) {
-            SubwayController.addSuccess(line.getName());
             lines.add(line);
             return true;
         }
-        SubwayController.addFail(line.getName());
         return false;
     }
 

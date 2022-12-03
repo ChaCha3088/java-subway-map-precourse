@@ -1,4 +1,4 @@
-package subway.domain;
+package subway.domain.station;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +30,16 @@ public class StationRepository {
     }
 
     public static Boolean putStationInLine(Integer index, String stationName) {
-        Integer result = findStationByStationName(stationName);
-        if (result == -1) {
-            stations.add(index-1, new Station(stationName));
-            return true;
+        try {
+            Integer result = findStationByStationName(stationName);
+            if (result == -1) {
+                stations.add(index - 1, new Station(stationName));
+                return true;
+            }
+            return false;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
         }
-        return false;
     }
 
     public static Boolean pullStationOutFromLine(String stationName) {
